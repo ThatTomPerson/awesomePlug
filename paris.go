@@ -1,6 +1,10 @@
 package main
 
-import "github.com/murlokswarm/app"
+import (
+	"github.com/murlokswarm/app"
+	"net/url"
+	"fmt"
+)
 
 // Paris is the component displaying Paris.
 type Paris struct{}
@@ -23,6 +27,12 @@ func (p *Paris) Render() string {
 	<a href="Sf">Go to San Francisco</a>
 </div>
 	`
+}
+
+// OnHref is defined to satisfy the Hrefer interface. It is called when a link
+// with href="Sf" is clicked.
+func (s *Sf) OnHref(URL *url.URL) {
+	fmt.Println("mounted from a link click:", URL)
 }
 
 // /!\ Register the component. Required to use the component into a context.
