@@ -2,18 +2,22 @@ language: go
 go:
 - 1.8.x
 - master
+
 install:
 - mkdir -p $GOPATH/bin
 - curl https://glide.sh/get | sh
 - glide install
+
 script:
 - go tool vet -composites=false -shadow=true *.go
 - go test -race $(go list ./... | grep -v /vendor/)
+
 before_deploy:
+- mkdir dist
 - |
   for GOOS in darwin linux windows; do
     for GOARCH in 386 amd64; do
-      go build -v -o $TRAVIS_BUILD_DIR/awesomeplug-$GOOS-$GOARCH;
+      go build -v -o dist/awesomeplug-$GOOS-$GOARCH;
     done;
   done
 
@@ -21,6 +25,7 @@ deploy:
   provider: releases
   api_key:
     secure: xHi4cVuFWAF7uVGYdYrDLk2FWOHLYgeH/nEJsmcjrFdTGzwLGbUjzmNpcP+do05o0LFEKnh3+MtohwPfSXCdfFmzEWZbVkkOVZb0FNBOtEG/kq38aVyAZAoXxSZmDf97FoIcjVApQqjdYukvzObnQahDeZAMDQm3JktWmGDKrA55NKZLRIw7lo8DqJ9pABwVD0IdKo3Cp6HX+mVjSMOmvpSauBEVmwE2sRkPM8TpZgZy2df32Fv5gYgXTEw9RTXi3s7kcQ7c/UTexY3Is3zT0Mcag8bNDM7A1rtfxTEKo/n4ShbnkLkCWbifBDrFJBLNc83Osw+GmioJ61MNTHLL1VGHQhaIxM4el1xbKQWZUmfU7AKDbBNiAAPI5JPbckM1m9kU3Ts1wWgPqFoDzvKoGqijTUdIDmushWc/OBLH3CW4vNtE4ztSJdCO6xvJrDuy1CGL+wHvFKHPPcX1z5Oen9jkovfU81ifaQv2p98cg+m6cll2rKsVHL8DKDxJzMAYGgmU60Ie+EiUea9jFIxZc6r25C78doZ1KYhtEVGBZ4nUw6lHoC96KJqPNbTdufIYY4PYNECH4exACT33XIAF0omcTRNGW/ChylpPwU0Z3iWS8Mkybx3xiyzBkC1MRQtty4XTpnA62Btq16eJVz6RdIoHQz21F7TU/GwKEDu+J9w=
-  file: $TRAVIS_BUILD_DIR/*
+  file_glob: true
+  file: dist/*
   on:
     repo: ThatTomPerson/awesomePlug
