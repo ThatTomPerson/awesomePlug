@@ -21,6 +21,8 @@ before_deploy:
     done;
   done
 
+
+
 deploy:
   provider: releases
   api_key:
@@ -28,4 +30,4 @@ deploy:
   file_glob: true
   file: dist/*
   on:
-    repo: ThatTomPerson/awesomePlug
+    tags: true
