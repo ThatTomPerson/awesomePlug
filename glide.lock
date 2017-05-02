@@ -5,6 +5,4 @@ imports:
   version: da118f7b8e5954f39d0d2130ab35d4bf0e3cb344
   subpackages:
   - websocket
-- name: golang.org/x/text
-  version: 470f45bf29f4147d6fbd7dfd0a02a848e49f5bf4
 testImports: []
