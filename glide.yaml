@@ -1,4 +1,4 @@
-package: gitlab.com/ThatTomPerson/awesomePlug
+package: github.com/ThatTomPerson/awesomePlug
 import:
 - package: golang.org/x/net
   subpackages:
