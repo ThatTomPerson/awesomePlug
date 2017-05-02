@@ -1,10 +1,22 @@
-hash: 3cafce6f62176991161c2579239f1c0afe0c896b595791c212db76647b6275e0
-updated: 2017-05-02T14:49:36.498828768+09:30
+hash: 79c51bcc7a4fa8169b7a9cae72d156da7bd2241d7c7aa2ab9e9c7e16b319a8d4
+updated: 2017-05-02T15:18:39.711923031+09:30
 imports:
 - name: github.com/murlokswarm/app
   version: f5d5a6656108cc5dc576690f989d8110692015ce
+- name: github.com/murlokswarm/cli
+  version: ff9f6f9686370c3ca109359ac6eea1056a6e88bc
+- name: github.com/murlokswarm/errors
+  version: 2c535fcba8dc697cb75a5ea135f6194ee9169824
+- name: github.com/murlokswarm/log
+  version: 3cc9a679b36d0c026f2dd557edf67379cbabc0da
 - name: github.com/murlokswarm/mac
   version: 7fcf408f7a44c1283f8df198b8a8b409c17c42e2
+- name: github.com/murlokswarm/markup
+  version: c8ad6c19eb30a85443f7826d49e3ae72b3e99808
+- name: github.com/pkg/errors
+  version: ff09b135c25aae272398c51a07235b90a75aa4f0
+- name: github.com/satori/go.uuid
+  version: 5bf94b69c6b68ee1b541973bb8e1144db23a194b
 - name: golang.org/x/net
   version: da118f7b8e5954f39d0d2130ab35d4bf0e3cb344
   subpackages:
