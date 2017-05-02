@@ -1,42 +1,26 @@
 package main
 
-import "github.com/murlokswarm/app"
-
-var (
-	win app.Windower
+import (
+	"golang.org/x/net/websocket"
+	"log"
+	"fmt"
 )
 
-func main() {
-	app.OnLaunch = func() {
-		if menuBar, ok := app.MenuBar(); ok {
-			menuBar.Mount(&MenuBar{})
-		}
+var origin = "https://plug.dj"
+var url = "wss://godj.plug.dj:443/socket"
 
-		win = newMainWindow()
-		win.Mount(&Paris{})
+func main () {
+	ws, err := websocket.Dial(url, "", origin)
+
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	app.OnReopen = func() {
-		if win != nil {
-			return
-		}
-		win = newMainWindow()
-		win.Mount(&Paris{})
+	var msg = make([]byte, 512)
+	_, err = ws.Read(msg)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	app.Run()
-}
-
-func newMainWindow() app.Windower {
-	return app.NewWindow(app.Window{
-		Title:           "nav",
-		TitlebarHidden:  true,
-		Width:           1280,
-		Height:          768,
-		BackgroundColor: "#21252b",
-		OnClose: func() bool {
-			win = nil
-			return true
-		},
-	})
+	fmt.Printf("Receive: %s\n", msg)
 }
