@@ -1,0 +1,5 @@
+package: gitlab.com/ThatTomPerson/awesomePlug
+import:
+- package: golang.org/x/net
+  subpackages:
+  - websocket
