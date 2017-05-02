@@ -11,7 +11,6 @@ install:
 script:
 - go tool vet -composites=false -shadow=true *.go
 - go list ./... | grep -v /vendor/
-- go test -race $(go list ./... | grep -v /vendor/)
 
 before_deploy:
 - mkdir dist
