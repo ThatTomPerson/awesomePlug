@@ -4,6 +4,8 @@ go:
 - master
 
 osx_image: xcode8.3
+os:
+  - osx
 
 install:
 - mkdir -p $GOPATH/bin
