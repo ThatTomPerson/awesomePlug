@@ -33,11 +33,11 @@ compile:
         - glide install
         - go get github.com/alecthomas/kingpin
         # Better put this in a Makefile
-        - GOOS=linux GOARCH=amd64 build -race -ldflags "-extldflags '-static'" -o awesomePlug_linux_amd64
-        - GOOS=windows GOARCH=amd64 build -race -ldflags "-extldflags '-static'" -o awesomePlug_windows_amd64
-        - GOOS=windows GOARCH=386 build -race -ldflags "-extldflags '-static'" -o awesomePlug_windows_386
-        - GOOS=darwin GOARCH=amd64 build -race -ldflags "-extldflags '-static'" -o awesomePlug_darwin_amd64
-        - GOOS=darwin GOARCH=306 build -race -ldflags "-extldflags '-static'" -o awesomePlug_darwin_386
+        - GOOS=linux GOARCH=amd64 go build -race -ldflags "-extldflags '-static'" -o awesomePlug_linux_amd64
+        - GOOS=windows GOARCH=amd64 go build -race -ldflags "-extldflags '-static'" -o awesomePlug_windows_amd64
+        - GOOS=windows GOARCH=386 go build -race -ldflags "-extldflags '-static'" -o awesomePlug_windows_386
+        - GOOS=darwin GOARCH=amd64 go build -race -ldflags "-extldflags '-static'" -o awesomePlug_darwin_amd64
+        - GOOS=darwin GOARCH=306 go build -race -ldflags "-extldflags '-static'" -o awesomePlug_darwin_386
     artifacts:
         paths:
             - awesomePlug_*
