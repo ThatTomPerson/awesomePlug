@@ -3,3 +3,5 @@ import:
 - package: golang.org/x/net
   subpackages:
   - websocket
+- package: github.com/murlokswarm/app
+- package: github.com/murlokswarm/mac

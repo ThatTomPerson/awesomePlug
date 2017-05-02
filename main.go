@@ -1,34 +1,50 @@
 package main
 
-// test a change
 import (
-	"golang.org/x/net/websocket"
-	"log"
-	"fmt"
+	"github.com/murlokswarm/app"
+	_ "github.com/murlokswarm/mac"
 )
 
-var origin = "https://plug.dj"
-var url = "wss://echo.websocket.org"
+var (
+	win app.Contexter
+)
 
-func main () {
-	ws, err := websocket.Dial(url, "", origin)
+func main() {
+	app.OnLaunch = func() {
+		appMenu := &AppMainMenu{}    // Creates the AppMainMenu component.
+		menu, ok := app.MenuBar()
+		if !ok {
+			return
+		}
+		menu.Mount(appMenu) // Mounts the AppMainMenu component into the application menu bar.
 
-	if err != nil {
-		log.Fatal(err)
+		appMenuDock := &AppMainMenu{} // Creates another AppMainMenu.
+		dock, ok := app.Dock()
+		if !ok {
+			return
+		}
+		dock.Mount(appMenuDock)
+
+		win = newMainWindow() // Create the main window.
 	}
 
-	message := []byte("hello, world!")
-	_, err = ws.Write(message)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Send: %s\n", message)
+	app.Run()
+}
 
-	var msg = make([]byte, 512)
-	_, err = ws.Read(msg)
-	if err != nil {
-		log.Fatal(err)
-	}
+func newMainWindow() app.Contexter {
+	// Creates a window context.
+	win := app.NewWindow(app.Window{
+		Title:          "Hello World",
+		Width:          1280,
+		Height:         720,
+		TitlebarHidden: true,
+		OnClose: func() bool {
+			win = nil
+			return true
+		},
+	})
 
-	fmt.Printf("Receive: %s\n", msg)
+	hello := &Hello{} // Creates a Hello component.
+	win.Mount(hello)  // Mounts the Hello component into the window context.
+	return win
 }
