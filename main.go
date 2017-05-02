@@ -7,7 +7,7 @@ import (
 )
 
 var origin = "https://plug.dj"
-var url = "wss://godj.plug.dj:443/socket"
+var url = "wss://echo.websocket.org"
 
 func main () {
 	ws, err := websocket.Dial(url, "", origin)
@@ -15,6 +15,13 @@ func main () {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	message := []byte("hello, world!")
+	_, err = ws.Write(message)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Send: %s\n", message)
 
 	var msg = make([]byte, 512)
 	_, err = ws.Read(msg)
