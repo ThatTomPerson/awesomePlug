@@ -1,7 +1,6 @@
 language: go
 go:
 - 1.8.x
-- master
 
 osx_image: xcode8.3
 os:
@@ -16,6 +15,7 @@ install:
 - mkdir /tmp/glide
 - tar --directory=/tmp/glide -xvf /tmp/glide.tar.gz
 - export PATH=$PATH:/tmp/glide/${GLIDE_OS_ARCH}
+- glide install
 
 script:
 - go tool vet -composites=false -shadow=true *.go
