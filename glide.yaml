@@ -3,3 +3,4 @@ import:
 - package: golang.org/x/net
   subpackages:
   - websocket
+- package: golang.org/x/text
